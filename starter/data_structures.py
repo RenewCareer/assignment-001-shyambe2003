@@ -30,7 +30,8 @@ def get_unique_sorted(items: list) -> list:
         >>> get_unique_sorted(["banana", "apple", "apple", "cherry"])
         ['apple', 'banana', 'cherry']
     """
-    pass  # TODO: implement this function
+    # TODO: implement this function
+    return sorted(set(items))
 
 
 # ---------------------------------------------------------------------------
@@ -48,7 +49,8 @@ def merge_and_sort(list1: list, list2: list) -> list:
         >>> merge_and_sort([], [7, 2])
         [2, 7]
     """
-    pass  # TODO: implement this function
+    # TODO: implement this function
+    return(sorted(list1 + list2))
 
 
 # ---------------------------------------------------------------------------
@@ -68,7 +70,14 @@ def count_word_frequency(sentence: str) -> dict:
         >>> count_word_frequency("Hello hello HELLO")
         {'hello': 3}
     """
-    pass  # TODO: implement this function
+    # TODO: implement this function
+    counts = {}
+
+    for word in sentence.split():
+        word = word.lower()
+        counts[word] = counts.get(word, 0) + 1
+
+    return counts
 
 
 # ---------------------------------------------------------------------------
@@ -88,7 +97,13 @@ def get_top_n(freq_dict: dict, n: int) -> list:
         >>> get_top_n({'a': 2, 'b': 2}, 5)
         ['a', 'b']
     """
-    pass  # TODO: implement this function
+    # TODO: implement this function
+    sorted_items = sorted(
+        freq_dict.items(),
+        key=lambda item: (-item[1], item[0])
+    )
+
+    return [key for key, value in sorted_items[:n]]
 
 
 # ---------------------------------------------------------------------------
@@ -108,7 +123,8 @@ def flatten_one_level(nested: list) -> list:
         >>> flatten_one_level([])
         []
     """
-    pass  # TODO: implement this function
+    # TODO: implement this function
+    return [item for sublist in nested for item in sublist]
 
 
 # ---------------------------------------------------------------------------
@@ -126,7 +142,8 @@ def invert_dictionary(d: dict) -> dict:
         >>> invert_dictionary({})
         {}
     """
-    pass  # TODO: implement this function
+    # TODO: implement this function
+    return {value: key for key, value in d.items()}
 
 
 # ---------------------------------------------------------------------------
@@ -146,8 +163,8 @@ def common_elements(list1: list, list2: list) -> list:
         >>> common_elements(["a", "b", "c"], ["b", "c", "d"])
         ['b', 'c']
     """
-    pass  # TODO: implement this function
-
+    # TODO: implement this function
+    return(sorted(set(list1) & set(list2)))
 
 # ---------------------------------------------------------------------------
 # Exercise 8  (5 pts)  — Dictionaries & Loops
@@ -167,4 +184,24 @@ def group_by_first_letter(words: list) -> dict:
         >>> group_by_first_letter([])
         {}
     """
-    pass  # TODO: implement this function
+    # TODO: implement this function
+    result = {}
+
+    for word in words:
+        if not word:   # ignore empty strings
+            continue
+
+        key = word[0].lower()
+
+        if key not in result:
+            result[key] = []
+
+        result[key].append(word)
+
+    # sort each group
+    for key in result:
+        result[key].sort()
+
+    return result
+
+ 
