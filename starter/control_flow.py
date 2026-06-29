@@ -38,7 +38,20 @@ def grade_calculator(score: float) -> str:
         >>> grade_calculator(55)
         'F'
     """
-    pass  # TODO: implement this function
+    # TODO: implement this function
+    if score < 0 or score > 100:
+        raise ValueError("Score must be between 0 and 100")
+
+    if score >= 90:
+        return "A"
+    elif score >= 80:
+        return "B"
+    elif score >= 70:
+        return "C"
+    elif score >= 60:
+        return "D"
+    else:
+        return "F"
 
 
 # ---------------------------------------------------------------------------
@@ -61,8 +74,23 @@ def fizzbuzz(n: int) -> list:
         [1, 2, 'Fizz', 4, 'Buzz', 'Fizz', 7, 8, 'Fizz', 'Buzz',
          11, 'Fizz', 13, 14, 'FizzBuzz']
     """
-    pass  # TODO: implement this function
+    # TODO: implement this function
+    if n < 1:
+        raise ValueError("n must be a positive integer")
 
+    result = []
+
+    for i in range(1, n + 1):
+        if i % 3 == 0 and i % 5 == 0:
+            result.append("FizzBuzz")
+        elif i % 3 == 0:
+            result.append("Fizz")
+        elif i % 5 == 0:
+            result.append("Buzz")
+        else:
+            result.append(i)
+
+    return result
 
 # ---------------------------------------------------------------------------
 # Exercise 3  (5 pts)  — for loop / list comprehension
@@ -82,7 +110,15 @@ def sum_of_evens(numbers: list) -> int:
         >>> sum_of_evens([1, "hello", 4, None, 6])
         10
     """
-    pass  # TODO: implement this function
+    # TODO: implement this function
+    total = 0
+
+    for x in numbers:
+        if isinstance(x, int) and not isinstance(x, bool):  # exclude bool (True/False)
+            if x % 2 == 0:
+                total += x
+
+    return total
 
 
 # ---------------------------------------------------------------------------
@@ -109,7 +145,21 @@ def is_prime(n: int) -> bool:
         >>> is_prime(15)
         False
     """
-    pass  # TODO: implement this function
+    # TODO: implement this function
+    if n < 2:
+        return False
+    if n == 2:
+        return True
+    if n % 2 == 0:
+        return False
+
+    i = 3
+    while i * i <= n:
+        if n % i == 0:
+            return False
+        i += 2
+
+    return True
 
 
 # ---------------------------------------------------------------------------
@@ -128,7 +178,33 @@ def find_primes(limit: int) -> list:
         >>> find_primes(1)
         []
     """
-    pass  # TODO: implement this function
+    # TODO: implement this function
+    if limit < 2:
+        return []
+
+    def is_prime(n):
+        if n < 2:
+            return False
+        if n == 2:
+            return True
+        if n % 2 == 0:
+            return False
+
+        i = 3
+        while i * i <= n:
+            if n % i == 0:
+                return False
+            i += 2
+
+        return True
+
+    primes = []
+
+    for num in range(2, limit + 1):
+        if is_prime(num):
+            primes.append(num)
+
+    return primes
 
 
 # ---------------------------------------------------------------------------
@@ -154,4 +230,18 @@ def collatz_length(n: int) -> int:
         >>> collatz_length(27)
         112
     """
-    pass  # TODO: implement this function
+    # TODO: implement this function
+    if n < 1:
+        raise ValueError("n must be a positive integer")
+
+    steps = 1  # starting number counts as step 1
+
+    while n != 1:
+        if n % 2 == 0:
+            n = n // 2
+        else:
+            n = 3 * n + 1
+
+        steps += 1
+
+    return steps

@@ -33,12 +33,19 @@ def create_student_info(name: str, age: int, gpa: float) -> dict:
         >>> create_student_info("  Bob  ", 17, 1.5)
         {'name': 'Bob', 'age': 17, 'gpa': 1.5, 'is_passing': False}
     """
-    pass  # TODO: implement this function
-
+      # TODO: implement this function
+   
+    #gpa1 = round(gpa, 2)
+    if(round(gpa, 2)>=2.0):
+        is_passing=True;
+    else:
+        is_passing=False;
+    
+    return{ 'name':(name).strip(),'age':age,'gpa':round(gpa, 2),'is_passing':is_passing}
 
 # ---------------------------------------------------------------------------
 # Exercise 2  (5 pts)
-# ---------------------------------------------------------------------------
+# --------------------------------------------------------------------------
 
 def convert_temperature(celsius: float) -> dict:
     """Convert a temperature from Celsius to Fahrenheit and Kelvin.
@@ -55,7 +62,16 @@ def convert_temperature(celsius: float) -> dict:
         >>> convert_temperature(100)
         {'celsius': 100.0, 'fahrenheit': 212.0, 'kelvin': 373.15}
     """
-    pass  # TODO: implement this function
+    if isinstance(celsius, float):
+        cel=round(celsius,2);
+    else:
+        cel=float(celsius);
+        
+    fah=(celsius*9/5)+32 ; # TODO: implement this function
+    #fahr= round(fah, 2);
+
+    kel=(celsius + 273.15);
+    return {'celsius':  round(cel, 2), 'fahrenheit':  round(fah, 2), 'kelvin':round(kel,2)}
 
 
 # ---------------------------------------------------------------------------
@@ -80,10 +96,22 @@ def classify_number(n: float) -> str:
         >>> classify_number(-7)
         'negative odd'
         >>> classify_number(0)
-        'zero'
+        c
     """
-    pass  # TODO: implement this function
+     # TODO: implement this function
+    str='';
+    if n > 0 and n % 2 == 0:
+        str='positive even';        
+    elif n > 0 and n%2 != 0:
+        str='positive odd'; 
+    elif n < 0 and n % 2 == 0:
+        str='negative even';
+    elif n <0 and n%2!=0:
+        str='negative odd';
+    else:
+        str='zero';
 
+    return str
 
 # ---------------------------------------------------------------------------
 # Exercise 4  (5 pts)
@@ -108,7 +136,30 @@ def format_greeting(name: str, language: str = "english") -> str:
         >>> format_greeting("bob")
         'Hello, Bob!'
     """
-    pass  # TODO: implement this function
+    # TODO: implement this function
+    
+    if name.istitle()==True:
+        pass
+    else:
+        name=name.title()
+    
+
+    str='Hello, '+name.title()+'!';
+    if language.lower()== 'english':
+        str='Hello, '+name.title()+'!';      
+    elif language.lower()== 'spanish':
+        str="¡Hola, "+name.title()+'!'; 
+    elif language.lower()== 'french':
+        str="Bonjour, "+name.title()+'!';
+    elif language.lower()== 'german':
+        str="Hallo, "+name.title()+'!';
+    elif language.lower()== 'swahili':
+        str="Habari, "+name.title()+'!';
+    else:
+        str='Hello, '+name.title()+'!';
+
+    return str
+
 
 
 # ---------------------------------------------------------------------------
@@ -137,7 +188,27 @@ def calculate_bmi(weight_kg: float, height_m: float) -> dict:
         >>> calculate_bmi(70, 1.75)
         {'bmi': 22.9, 'category': 'Normal weight'}
     """
-    pass  # TODO: implement this function
+    # TODO: implement this function
+    
+    
+    if height_m <= 0:
+        raise ValueError("Height must be positive")   
+    elif weight_kg <= 0:
+        raise ValueError("Weight must be positive")
+    else:
+        bmi = weight_kg / (height_m ** 2);
+    
+
+    if bmi < 18.5:
+        category = "Underweight"
+    elif 18.5 <= bmi < 25.0:
+        category = "Normal weight"
+    elif 25.0 <= bmi < 30.0:
+        category = "Overweight"
+    else:
+        category = "Obese"
+    
+    return {'bmi':round(bmi,1) , 'category': category}
 
 
 # ---------------------------------------------------------------------------
@@ -159,4 +230,9 @@ def safe_divide(numerator: float, denominator: float) -> str:
         >>> safe_divide(7, 0)
         'Error: division by zero'
     """
-    pass  # TODO: implement this function
+    # TODO: implement this function
+    if denominator ==0:
+        return "Error: division by zero";
+    else:
+        result = numerator / denominator;
+        return f"{result:.4f}"
